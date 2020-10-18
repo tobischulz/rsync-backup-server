@@ -15,7 +15,7 @@ composer require tobischulz/rsync-backup-server
 Publish the package files:
 
 ```bash
-php artisan vendor:publish --provider=TobiSchulz\RsyncBackupServer\RsyncBackupServerProvider
+php artisan vendor:publish --provider="TobiSchulz\RsyncBackupServer\RsyncBackupServerProvider"
 ```
 
 Add a backup destination storage disk `config/filesystems.php`, where to store all the backup files. Driver **has** to be **`local`**.
@@ -56,6 +56,8 @@ QUEUE_CONNECTION=database  // redis for horizon
 ```
 
 This package should work with every laravel queue system. Currently i tested it only with database. Make sure your migrations has been run for database queue driver.
+
+You can publish the queue migrations with this artisan command: `php artisan queue:table`
 
 ## Usage
 
