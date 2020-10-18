@@ -1,0 +1,48 @@
+{
+    "name": "tobischulz/rsync-backup-server",
+    "description": "self-host rsync backup server for laravel",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tobias Schulz",
+            "email": "tobias@byte.software",
+            "homepage": "https://byte.software"
+        }
+    ],
+    "require": {
+        "php": "^7.3",
+        "illuminate/console": "^6.0|^7.0|^8.0",
+        "illuminate/contracts": "^6.0|^7.0|^8.0",
+        "illuminate/events": "^6.0|^7.0|^8.0",
+        "illuminate/filesystem": "^6.0|^7.0|^8.0",
+        "illuminate/notifications": "^6.0|^7.0|^8.0",
+        "illuminate/support": "^6.0|^7.0|^8.0",
+        "spatie/ssh": "^1.4",
+        "symfony/process": "^5.1"
+    },
+    "require-dev": {
+        "orchestra/testbench": "5.*|6.*",
+        "phpunit/phpunit": "^9.3.10",
+        "pestphp/pest": "^0.3.9"
+    },
+    "autoload": {
+        "psr-4": {
+            "TobiSchulz\\RsyncBackupServer\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "TobiSchulz\\RsyncBackupServer\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "TobiSchulz\\RsyncBackupServer\\RsyncBackupServerProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
