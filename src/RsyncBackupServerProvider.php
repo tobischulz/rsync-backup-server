@@ -3,6 +3,7 @@
 namespace TobiSchulz\RsyncBackupServer;
 
 use Illuminate\Support\ServiceProvider;
+use TobiSchulz\RsyncBackupServer\Console\Commands\BackupAddSourceCommand;
 use TobiSchulz\RsyncBackupServer\Console\Commands\BackupRunCommand;
 use TobiSchulz\RsyncBackupServer\Console\Commands\BackupsDispatchCommand;
 
@@ -37,10 +38,12 @@ class RsyncBackupServerProvider extends ServiceProvider
         ], 'migrations');
 
         $this->app->bind('command.backup:run', BackupRunCommand::class);
+        $this->app->bind('command.backup:add', BackupAddSourceCommand::class);
         $this->app->bind('command.backups:dispatch', BackupsDispatchCommand::class);
 
         $this->commands([
             'command.backup:run',
+            'command.backup:add',
             'command.backups:dispatch',
         ]);
     }
