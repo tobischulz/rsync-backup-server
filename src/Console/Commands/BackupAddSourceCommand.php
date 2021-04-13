@@ -2,10 +2,10 @@
 
 namespace TobiSchulz\RsyncBackupServer\Console\Commands;
 
-use TobiSchulz\RsyncBackupServer\Models\SourceServer;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Config;
 use Throwable;
+use TobiSchulz\RsyncBackupServer\Models\SourceServer;
 
 class BackupAddSourceCommand extends Command
 {
@@ -40,39 +40,39 @@ class BackupAddSourceCommand extends Command
      */
     public function handle()
     {
-
-        $this->info("Add new backup source server..");
+        $this->info('Add new backup source server..');
 
         $source = new SourceServer();
 
-        $source->name = $this->ask("Please enter the Source Server Name :");
+        $source->name = $this->ask('Please enter the Source Server Name :');
 
-        $source->source = $this->ask("Please enter the Source Server IP :");
+        $source->source = $this->ask('Please enter the Source Server IP :');
 
-        $source->ssh_user = $this->ask("SSH User Name :");
+        $source->ssh_user = $this->ask('SSH User Name :');
 
-        $source->ssh_private_key_path = $this->ask("SSH private key path :", '~/.ssh/id_rsa');
+        $source->ssh_private_key_path = $this->ask('SSH private key path :', '~/.ssh/id_rsa');
 
-        $source->ssh_port = $this->ask("SSH port :", 22);
+        $source->ssh_port = $this->ask('SSH port :', 22);
 
-        $source->backup_hour = $this->ask("Backup Hour :", 5);
+        $source->backup_hour = $this->ask('Backup Hour :', 5);
 
-        $source->source_path = $this->ask("Source Path :", base_path('*'));
+        $source->source_path = $this->ask('Source Path :', base_path('*'));
 
         $disks = array_keys(Config::get('filesystems.disks', []));
 
         if (count($disks)) {
-            $source->destination_disk = $this->choice("Destination Disk :", $disks);
+            $source->destination_disk = $this->choice('Destination Disk :', $disks);
         } else {
-            $source->destination_disk = $this->ask("Destination Disk :");
+            $source->destination_disk = $this->ask('Destination Disk :');
         }
 
-        $source->type = $this->choice("Backup type :", ['rsync', 'backup']);
+        $source->type = $this->choice('Backup type :', ['rsync', 'backup']);
 
         try {
             $source->save();
         } catch (Throwable $th) {
-            $this->error("Cannot able to add new source server. Please check the values");
+            $this->error('Cannot able to add new source server. Please check the values');
+
             return 1;
         }
 
